@@ -7,8 +7,14 @@ describe('arrayDiff should', () => {
         expect(arrayDiff([], [])).to.eql([]);
     });
 
-    xit('return a when b is []', () => {
-        expect(arrayDiff([1], [])).to.eql([1]);
+    describe('return a when b is []', () => {
+        it.each([
+            [[1]],
+            [[2]],
+            [[1, 2]],
+        ])('a = %p', (a: number[]) => {
+            expect(arrayDiff(a, [])).to.eql(a);
+        });
     });
 });
 
