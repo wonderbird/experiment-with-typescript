@@ -1,2 +1,3 @@
-# experiment-with-typescript
+# Experiment with TypeScript
+
 Learning experiments with TypeScript
