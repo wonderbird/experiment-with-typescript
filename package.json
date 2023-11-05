@@ -1,0 +1,22 @@
+{
+  "name": "experiment-with-typescript",
+  "version": "1.0.0",
+  "description": "Learning experiments with TypeScript",
+  "main": "index.js",
+  "private": true,
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Stefan Boos <kontakt@boos.systems>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.7",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
+  }
+}
