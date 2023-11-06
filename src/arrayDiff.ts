@@ -1,6 +1,11 @@
 export function arrayDiff(a: number[], b: number[]): number[] {
-    if (a.length > 0) {
-        return a;
-    }
-    return [];
+    let result: number[] = []
+
+    a.forEach(value => {
+        if (!b.includes(value)) {
+            result.push(value);
+        }
+    })
+
+    return result;
 }

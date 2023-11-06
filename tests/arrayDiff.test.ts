@@ -26,10 +26,38 @@ describe('arrayDiff should', () => {
             expect(arrayDiff(a, b)).to.eql(a);
         });
     });
+
+    describe('return [] when a is b', () => {
+        it.each([
+            [[1]],
+            [[2]],
+            [[1, 2]],
+        ])('a and b = %p', (ab: number[]) => {
+            expect(arrayDiff(ab, ab)).to.eql([]);
+        });
+    });
+
+    describe('return remainder when a is superset of b', () => {
+        it.each([
+            [[1, 2], [1], [2]],
+            [[1, 2, 3, 4], [1, 3], [2, 4]],
+        ])('%p - %p = %p', (ab: number[]) => {
+            expect(arrayDiff(ab, ab)).to.eql([]);
+        });
+    });
+
+    describe('return remainder when some a included in b', () => {
+        it.each([
+            [[1, 2], [0, 1], [2]],
+            [[1, 2, 3, 4], [1, 3, 5], [2, 4]],
+        ])('%p - %p = %p', (ab: number[]) => {
+            expect(arrayDiff(ab, ab)).to.eql([]);
+        });
+    });
 });
 
 describe('Basic tests', () => {
-    xit('Basic test should work', () => {
+    it('Basic test should work', () => {
         expect(arrayDiff([], [4, 5])).to.eql([], 'a was [], b was [4,5]');
         expect(arrayDiff([3, 4], [3])).to.eql([4], 'a was [3, 4], b was [3]');
         expect(arrayDiff([1, 8, 2], [])).to.eql([1, 8, 2], 'a was [1, 8, 2], b was []');
