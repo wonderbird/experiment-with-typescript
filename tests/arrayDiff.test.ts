@@ -16,6 +16,16 @@ describe('arrayDiff should', () => {
             expect(arrayDiff(a, [])).to.eql(a);
         });
     });
+
+    describe('return a when b is not contained', () => {
+        it.each([
+            [[1], [0]],
+            [[2], [0, 1]],
+            [[1, 2], [3, 4]],
+        ])('a = %p, b = %p', (a: number[], b: number[]) => {
+            expect(arrayDiff(a, b)).to.eql(a);
+        });
+    });
 });
 
 describe('Basic tests', () => {
