@@ -1,7 +1,9 @@
 export const digitalRoot = (n: number): number => {
-  let sum = [...Array(numberOfDigits()).keys()]
-    .map(digitAt)
-    .reduce((sum, digit) => sum + digit, 0);
+  let sum = [...Array(numberOfDigits()).keys()].map(digitAt).reduce(add, 0);
+
+  if (sum >= 10) {
+    return digitalRoot(sum);
+  }
 
   return sum;
 
@@ -11,5 +13,9 @@ export const digitalRoot = (n: number): number => {
 
   function digitAt(decimalPlace: number): number {
     return Math.floor(n / Math.pow(10, decimalPlace)) % 10;
+  }
+
+  function add(a: number, b: number) {
+    return a + b;
   }
 };

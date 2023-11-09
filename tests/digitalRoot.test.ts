@@ -17,10 +17,19 @@ describe("digitalRoot should", () => {
       }
     );
   });
+
+  describe("return reduced sum of digits when sum > 10", () => {
+    it.each([[9, 99]])(
+      "expect %p for n = %p",
+      (expected: number, n: number) => {
+        digitalRoot(n).should.equal(expected);
+      }
+    );
+  });
 });
 
 describe("solution", () => {
-  xit("should work for fixed tests", () => {
+  it("should work for fixed tests", () => {
     assert.equal(digitalRoot(16), 7);
     assert.equal(digitalRoot(456), 6);
   });
