@@ -1,5 +1,5 @@
 export const digitalRoot = (n: number): number => {
-  let numberOfDigits = Math.floor(Math.log10(n)) + 1;
+  let numberOfDigits = n === 0 ? 0 : Math.floor(Math.log10(n)) + 1;
 
   let digitAt = (decimalPlace: number) =>
     Math.floor(n / Math.pow(10, decimalPlace)) % 10;

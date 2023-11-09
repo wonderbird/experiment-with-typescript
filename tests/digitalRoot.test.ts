@@ -5,7 +5,7 @@ import { digitalRoot } from "../src/digitalRoot";
 describe("digitalRoot should", () => {
   describe("return n when n < 10", () => {
     it.each([0, 1, 2, 9])("n = %p", (n: number) => {
-      digitalRoot(1).should.equal(1);
+      digitalRoot(n).should.equal(n);
     });
   });
 
