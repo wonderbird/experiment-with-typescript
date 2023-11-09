@@ -2,10 +2,11 @@
 
 Learning experiments with TypeScript
 
-| Kata name and link                                                                                      | Dificulty (kyu) | Solution                               | Tests                                              |
-|-------------------------------------|-----------------|-----------------------|----------------------------------------------------|
-| [Array.diff](https://www.codewars.com/kata/523f5d21c841566fde000009/train/typescript)                   | 6               | [arrayDiff.ts](./src/arrayDiff.ts)   | [arrayDiff.test.ts](./tests/arrayDiff.test.ts)     |
-| [Sum of Digits / Digital Root](https://www.codewars.com/kata/541c8630095125aba6000c00/train/typescript) | 6               | [digitalRoot.ts](./src/digitalRoot.ts) | [digitalRoot.test.ts](./tests/digitalRoot.test.ts) |
+| Kata name and link                                                                                      | Dificulty (kyu) | Solution                                | Tests                                                   |
+|---------------------------------------------------------------------------------------------------------|-----------------|-----------------------------------------|---------------------------------------------------------|
+| [Array.diff](https://www.codewars.com/kata/523f5d21c841566fde000009/train/typescript)                   | 6               | [arrayDiff.ts](./src/arrayDiff.ts)      | [arrayDiff.test.ts](./tests/arrayDiff.test.ts)          |
+| [Sum of Digits / Digital Root](https://www.codewars.com/kata/541c8630095125aba6000c00/train/typescript) | 6               | [digitalRoot.ts](./src/digitalRoot.ts)  | [digitalRoot.test.ts](./tests/digitalRoot.test.ts)      |
+| [Narcissistic Number](https://www.codewars.com/kata/5287e858c6b5a9678200083c/train/typescript)          | 6               | [narcissistic.ts](./src/narcissistic.ts) | [narcissistic.test.ts](./tests/narcissistic.test.ts)     |
 
 ## Install prerequisites
 
