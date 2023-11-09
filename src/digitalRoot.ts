@@ -1,12 +1,10 @@
 export const digitalRoot = (n: number): number => {
-  let numberOfDigits = n === 0 ? 0 : Math.floor(Math.log10(n)) + 1;
+  let sum = n
+    .toString()
+    .split("")
+    .map(Number)
+    .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
 
-  let digitAt = (decimalPlace: number) =>
-    Math.floor(n / Math.pow(10, decimalPlace)) % 10;
-
-  let add = (a: number, b: number) => a + b;
-
-  let sum = [...Array(numberOfDigits).keys()].map(digitAt).reduce(add, 0);
   if (sum >= 10) {
     return digitalRoot(sum);
   }
