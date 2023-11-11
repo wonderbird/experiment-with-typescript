@@ -39,6 +39,18 @@ describe("clock should", () => {
     );
   });
 
+  describe("use memory as circular buffer", () => {
+    it.each([
+      [1, [1, 2], [2]],
+      [3, [1, 2, 3, 4, 5, 6], [4, 5, 6]],
+    ])(
+      "given n = %p, referenceList = %p",
+      (n: number, referenceList: number[], expected: number[]) => {
+        clock(n, referenceList).should.deep.equal(expected);
+      }
+    );
+  });
+
   describe("represent unused pages by -1", () => {
     it.each([
       [1, [], [-1]],

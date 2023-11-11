@@ -21,11 +21,11 @@ export function clock(n: number, referenceList: number[]): number[] {
   if (n === 0) return [];
 
   let memory: number[] = Array(n).fill(-1);
-  let pointer = 0;
+  let iterator = 0;
   for (let reference of referenceList) {
     if (!memory.includes(reference)) {
-      memory[pointer] = reference;
-      pointer = pointer + 1;
+      memory[iterator] = reference;
+      iterator = (iterator + 1) % n;
     }
   }
 
