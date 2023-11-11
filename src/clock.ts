@@ -18,5 +18,7 @@
 // | 2 | any two different elements  | [first, second] |
 // | 2 | two different elements alternating  | depends on sequence |
 export function clock(n: number, referenceList: number[]): number[] {
-  return [];
+  if (n === 0) return [];
+
+  return Array(n).fill(-1);
 }
