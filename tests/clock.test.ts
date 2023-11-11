@@ -22,6 +22,17 @@ describe("clock should", () => {
       clock(n, []).should.deep.equal(expected);
     });
   });
+
+  describe("return reference list when all reference are different and their length equals n", () => {
+    it.each([[[1]], [[1, 2]], [[1, 2, 3]]])(
+      "given referenceList = %p",
+      (referenceList: number[]) => {
+        clock(referenceList.length, referenceList).should.deep.equal(
+          referenceList
+        );
+      }
+    );
+  });
 });
 
 function doTest(n: number, referenceList: number[], expected: number[]) {

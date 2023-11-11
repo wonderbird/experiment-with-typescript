@@ -20,5 +20,7 @@
 export function clock(n: number, referenceList: number[]): number[] {
   if (n === 0) return [];
 
-  return Array(n).fill(-1);
+  if (referenceList.length === 0) return Array(n).fill(-1);
+
+  return referenceList;
 }
