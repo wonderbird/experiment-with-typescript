@@ -20,7 +20,14 @@
 export function clock(n: number, referenceList: number[]): number[] {
   if (n === 0) return [];
 
-  let unusedPages: number[] = Array(n - referenceList.length).fill(-1);
+  let memory: number[] = Array(n).fill(-1);
+  let pointer = 0;
+  for (let reference of referenceList) {
+    if (!memory.includes(reference)) {
+      memory[pointer] = reference;
+      pointer = pointer + 1;
+    }
+  }
 
-  return [...referenceList, ...unusedPages];
+  return memory;
 }

@@ -24,6 +24,21 @@ describe("clock should", () => {
     );
   });
 
+  describe("reuse references already in memory", () => {
+    it.each([
+      [2, [1, 1], [1, -1]],
+      [3, [1, 2, 1], [1, 2, -1]],
+      [3, [1, 2, 3, 1], [1, 2, 3]],
+      [3, [1, 2, 3, 1, 2], [1, 2, 3]],
+      [3, [1, 3, 1, 2], [1, 3, 2]],
+    ])(
+      "given n = %p, referenceList = %p",
+      (n: number, referenceList: number[], expected: number[]) => {
+        clock(n, referenceList).should.deep.equal(expected);
+      }
+    );
+  });
+
   describe("represent unused pages by -1", () => {
     it.each([
       [1, [], [-1]],
