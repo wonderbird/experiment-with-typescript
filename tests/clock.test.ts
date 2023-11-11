@@ -13,16 +13,6 @@ describe("clock should", () => {
     );
   });
 
-  describe("return array of -1 when reference list empty", () => {
-    it.each([
-      [1, [-1]],
-      [2, [-1, -1]],
-      [3, [-1, -1, -1]],
-    ])("given n = %p", (n: number, expected: number[]) => {
-      clock(n, []).should.deep.equal(expected);
-    });
-  });
-
   describe("return reference list when all reference are different and their length equals n", () => {
     it.each([[[1]], [[1, 2]], [[1, 2, 3]]])(
       "given referenceList = %p",
@@ -30,6 +20,21 @@ describe("clock should", () => {
         clock(referenceList.length, referenceList).should.deep.equal(
           referenceList
         );
+      }
+    );
+  });
+
+  describe("represent unused pages by -1", () => {
+    it.each([
+      [1, [], [-1]],
+      [2, [], [-1, -1]],
+      [3, [], [-1, -1, -1]],
+      [2, [1], [1, -1]],
+      [5, [1, 2], [1, 2, -1, -1, -1]],
+    ])(
+      "given n = %p, referenceList = %p",
+      (n: number, referenceList: number[], expected: number[]) => {
+        clock(n, referenceList).should.deep.equal(expected);
       }
     );
   });

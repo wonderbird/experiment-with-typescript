@@ -11,16 +11,16 @@
 // |---|-------------------|----------|
 // | 0 | any               | []       |
 // | 1 | []                | [-1]     |
-// | 1 | any               | [last element in referenceList] |
 // | 2 | []                | [-1, -1] |
 // | 2 | any one element   | [that element, -1] |
-// | 2 | any number of same elements  | [that element, -1] |
 // | 2 | any two different elements  | [first, second] |
+// | 1 | any               | [last element in referenceList] |
+// | 2 | any number of same elements  | [that element, -1] |
 // | 2 | two different elements alternating  | depends on sequence |
 export function clock(n: number, referenceList: number[]): number[] {
   if (n === 0) return [];
 
-  if (referenceList.length === 0) return Array(n).fill(-1);
+  let unusedPages: number[] = Array(n - referenceList.length).fill(-1);
 
-  return referenceList;
+  return [...referenceList, ...unusedPages];
 }
