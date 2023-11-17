@@ -27,18 +27,35 @@ export function clock(n: number, referenceList: number[]): number[] {
   let memory: Page[] = Array(n).fill(new Page(-1, 0));
 
   let iterator: number = 0;
+
+  function findPageInMemory(reference: number) {
+    return memory.find((page) => page.id === reference);
+  }
+
+  function getCurrentPage() {
+    return memory[iterator];
+  }
+
+  function replacePage(reference: number) {
+    memory[iterator] = { id: reference, referenceCounter: 0 };
+  }
+
+  function advanceIterator() {
+    iterator = (iterator + 1) % n;
+  }
+
   for (let reference of referenceList) {
     let found = false;
     while (!found) {
-      let page = memory.find((page) => page.id === reference);
+      let page = findPageInMemory(reference);
       found = page !== undefined;
       if (!page) {
-        if (memory[iterator].referenceCounter > 0) {
-          memory[iterator].referenceCounter--;
-          iterator = (iterator + 1) % n;
+        if (getCurrentPage().referenceCounter > 0) {
+          getCurrentPage().referenceCounter--;
+          advanceIterator();
         } else {
-          memory[iterator] = { id: reference, referenceCounter: 0 };
-          iterator = (iterator + 1) % n;
+          replacePage(reference);
+          advanceIterator();
           found = true;
         }
       } else {
