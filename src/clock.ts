@@ -59,6 +59,10 @@ export function clock(n: number, referenceList: number[]): number[] {
     public replaceCurrentPage(reference: number) {
       this.pages[this.iterator] = new Page(reference, 0);
     }
+
+    public get pageIds(): number[] {
+      return this.pages.map((page) => page.id);
+    }
   }
 
   let alternativeMemory: Memory = new Memory(memory);
@@ -83,5 +87,5 @@ export function clock(n: number, referenceList: number[]): number[] {
     }
   }
 
-  return memory.map((page) => page.id);
+  return alternativeMemory.pageIds;
 }
