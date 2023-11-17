@@ -51,6 +51,15 @@ describe("clock should", () => {
     );
   });
 
+  describe("keep pages referenced twice", () => {
+    it.each([[2, [1, 1, 2, 3], [1, 3]]])(
+      "given n = %p, referenceList = %p",
+      (n: number, referenceList: number[], expected: number[]) => {
+        clock(n, referenceList).should.deep.equal(expected);
+      }
+    );
+  });
+
   describe("represent unused pages by -1", () => {
     it.each([
       [1, [], [-1]],
@@ -77,7 +86,7 @@ function doTest(n: number, referenceList: number[], expected: number[]) {
 }
 
 describe("Basic Tests", function () {
-  xit("Basic Tests", function () {
+  it("Basic Tests", function () {
     const TESTS: [number, number[], number[]][] = [
       [4, [1, 2, 3, 4, 5, 5, 3, 6, 7, 8], [5, 8, 3, 7]],
       [3, [1, 2, 3, 4, 2, 5], [4, 2, 5]],

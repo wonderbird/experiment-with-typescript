@@ -20,14 +20,31 @@
 export function clock(n: number, referenceList: number[]): number[] {
   if (n === 0) return [];
 
-  let memory: number[] = Array(n).fill(-1);
-  let iterator = 0;
+  let memory: { id: number; referenceCounter: number }[] = Array(n).fill({
+    id: -1,
+    referenceCounter: 0,
+  });
+
+  let iterator: number = 0;
   for (let reference of referenceList) {
-    if (!memory.includes(reference)) {
-      memory[iterator] = reference;
-      iterator = (iterator + 1) % n;
+    let found = false;
+    while (!found) {
+      let page = memory.find((page) => page.id === reference);
+      found = page !== undefined;
+      if (!page) {
+        if (memory[iterator].referenceCounter > 0) {
+          memory[iterator].referenceCounter--;
+          iterator = (iterator + 1) % n;
+        } else {
+          memory[iterator] = { id: reference, referenceCounter: 0 };
+          iterator = (iterator + 1) % n;
+          found = true;
+        }
+      } else {
+        page.referenceCounter++;
+      }
     }
   }
 
-  return memory;
+  return memory.map((page) => page.id);
 }
