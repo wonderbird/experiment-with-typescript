@@ -24,16 +24,12 @@ export function clock(n: number, referenceList: number[]): number[] {
     constructor(public id: number, public referenceCounter: number) {}
   }
 
-  let memory: Page[] = Array(n).fill(new Page(-1, 0));
-
-  let iterator: number = 0;
-
   class Memory {
     private pages: Page[] = [];
     private _iterator: number = 0;
 
-    constructor(pages: Page[]) {
-      this.pages = pages;
+    constructor(n: number) {
+      this.pages = Array(n).fill(new Page(-1, 0));
     }
 
     public get iterator() {
@@ -85,7 +81,7 @@ export function clock(n: number, referenceList: number[]): number[] {
     }
   }
 
-  let alternativeMemory: Memory = new Memory(memory);
+  let alternativeMemory: Memory = new Memory(n);
 
   for (let reference of referenceList) {
     alternativeMemory.request(reference);
