@@ -56,18 +56,20 @@ export function clock(n: number, referenceList: number[]): number[] {
       let found = false;
       while (!found) {
         let page = this.find(pageReference);
-        found = page !== undefined;
-        if (!page) {
-          if (this.currentPage().referenceCounter > 0) {
-            this.currentPage().referenceCounter--;
-            this.advanceIterator();
-          } else {
-            this.replaceCurrentPage(pageReference);
-            this.advanceIterator();
-            found = true;
-          }
-        } else {
+        if (page) {
           page.referenceCounter++;
+          found = true;
+        }
+
+        if (!page && this.currentPage().referenceCounter === 0) {
+          this.replaceCurrentPage(pageReference);
+          this.advanceIterator();
+          found = true;
+        }
+
+        if (!page && this.currentPage().referenceCounter > 0) {
+          this.currentPage().referenceCounter--;
+          this.advanceIterator();
         }
       }
     }
