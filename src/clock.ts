@@ -51,13 +51,13 @@ export function clock(n: number, referenceList: number[]): number[] {
     public find(reference: number) {
       return this.pages.find((page) => page.id === reference);
     }
+
+    public currentPage(): Page {
+      return this.pages[this.iterator];
+    }
   }
 
   let alternativeMemory: Memory = new Memory(memory);
-
-  function getCurrentPage() {
-    return memory[alternativeMemory.iterator];
-  }
 
   function replacePage(reference: number) {
     memory[alternativeMemory.iterator] = { id: reference, referenceCounter: 0 };
@@ -69,8 +69,8 @@ export function clock(n: number, referenceList: number[]): number[] {
       let page = alternativeMemory.find(reference);
       found = page !== undefined;
       if (!page) {
-        if (getCurrentPage().referenceCounter > 0) {
-          getCurrentPage().referenceCounter--;
+        if (alternativeMemory.currentPage().referenceCounter > 0) {
+          alternativeMemory.currentPage().referenceCounter--;
           alternativeMemory.advanceIterator();
         } else {
           replacePage(reference);
