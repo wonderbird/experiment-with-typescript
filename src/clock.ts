@@ -28,20 +28,34 @@ export function clock(n: number, referenceList: number[]): number[] {
 
   let iterator: number = 0;
 
+  class Memory {
+    private pages: Page[] = [];
+
+    constructor(pages: Page[]) {
+      this.pages = pages;
+    }
+  }
+
+  let alternativeMemory: Memory = new Memory(memory);
+
   function findPageInMemory(reference: number) {
     return memory.find((page) => page.id === reference);
   }
 
+  function getIterator() {
+    return iterator;
+  }
+
   function getCurrentPage() {
-    return memory[iterator];
+    return memory[getIterator()];
   }
 
   function replacePage(reference: number) {
-    memory[iterator] = { id: reference, referenceCounter: 0 };
+    memory[getIterator()] = { id: reference, referenceCounter: 0 };
   }
 
   function advanceIterator() {
-    iterator = (iterator + 1) % n;
+    iterator = (getIterator() + 1) % n;
   }
 
   for (let reference of referenceList) {
