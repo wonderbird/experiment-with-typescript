@@ -53,21 +53,21 @@ export function clock(n: number, referenceList: number[]): number[] {
     }
 
     public request(pageReference: number) {
+      let page = this.find(pageReference);
+      if (page) {
+        page.referenceCounter++;
+        return;
+      }
+
       let found = false;
       while (!found) {
-        let page = this.find(pageReference);
-        if (page) {
-          page.referenceCounter++;
-          found = true;
-        }
-
-        if (!page && this.currentPage().referenceCounter === 0) {
+        if (this.currentPage().referenceCounter === 0) {
           this.replaceCurrentPage(pageReference);
           this.advanceIterator();
-          found = true;
+          break;
         }
 
-        if (!page && this.currentPage().referenceCounter > 0) {
+        if (this.currentPage().referenceCounter > 0) {
           this.currentPage().referenceCounter--;
           this.advanceIterator();
         }
