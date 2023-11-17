@@ -44,10 +44,6 @@ export function clock(n: number, referenceList: number[]): number[] {
       return this.pages[this.iterator];
     }
 
-    public replaceCurrentPage(reference: number) {
-      this.pages[this.iterator] = new Page(reference, 0);
-    }
-
     public get pageIds(): number[] {
       return this.pages.map((page) => page.id);
     }
@@ -59,19 +55,22 @@ export function clock(n: number, referenceList: number[]): number[] {
         return;
       }
 
-      let found = false;
-      while (!found) {
-        if (this.currentPage().referenceCounter === 0) {
-          this.replaceCurrentPage(pageReference);
-          this.advanceIterator();
-          break;
-        }
+      this.findInsertPosition();
 
-        if (this.currentPage().referenceCounter > 0) {
-          this.currentPage().referenceCounter--;
-          this.advanceIterator();
-        }
+      this.insert(pageReference);
+    }
+
+    private findInsertPosition() {
+      if (this.currentPage().referenceCounter > 0) {
+        this.currentPage().referenceCounter--;
+        this.advanceIterator();
+        this.findInsertPosition();
       }
+    }
+
+    private insert(reference: number) {
+      this.pages[this.iterator] = new Page(reference, 0);
+      this.advanceIterator();
     }
   }
 
