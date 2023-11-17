@@ -55,13 +55,13 @@ export function clock(n: number, referenceList: number[]): number[] {
     public currentPage(): Page {
       return this.pages[this.iterator];
     }
+
+    public replaceCurrentPage(reference: number) {
+      this.pages[this.iterator] = new Page(reference, 0);
+    }
   }
 
   let alternativeMemory: Memory = new Memory(memory);
-
-  function replacePage(reference: number) {
-    memory[alternativeMemory.iterator] = { id: reference, referenceCounter: 0 };
-  }
 
   for (let reference of referenceList) {
     let found = false;
@@ -73,7 +73,7 @@ export function clock(n: number, referenceList: number[]): number[] {
           alternativeMemory.currentPage().referenceCounter--;
           alternativeMemory.advanceIterator();
         } else {
-          replacePage(reference);
+          alternativeMemory.replaceCurrentPage(reference);
           alternativeMemory.advanceIterator();
           found = true;
         }
