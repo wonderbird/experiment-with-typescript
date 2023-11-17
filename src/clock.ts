@@ -30,9 +30,22 @@ export function clock(n: number, referenceList: number[]): number[] {
 
   class Memory {
     private pages: Page[] = [];
+    private _iterator: number = 0;
 
     constructor(pages: Page[]) {
       this.pages = pages;
+    }
+
+    public get iterator() {
+      return this._iterator;
+    }
+
+    public set iterator(value: number) {
+      this._iterator = value;
+    }
+
+    public advanceIterator(): void {
+      this.iterator = (this.iterator + 1) % n;
     }
   }
 
@@ -42,20 +55,12 @@ export function clock(n: number, referenceList: number[]): number[] {
     return memory.find((page) => page.id === reference);
   }
 
-  function getIterator() {
-    return iterator;
-  }
-
   function getCurrentPage() {
-    return memory[getIterator()];
+    return memory[alternativeMemory.iterator];
   }
 
   function replacePage(reference: number) {
-    memory[getIterator()] = { id: reference, referenceCounter: 0 };
-  }
-
-  function advanceIterator() {
-    iterator = (getIterator() + 1) % n;
+    memory[alternativeMemory.iterator] = { id: reference, referenceCounter: 0 };
   }
 
   for (let reference of referenceList) {
@@ -66,10 +71,10 @@ export function clock(n: number, referenceList: number[]): number[] {
       if (!page) {
         if (getCurrentPage().referenceCounter > 0) {
           getCurrentPage().referenceCounter--;
-          advanceIterator();
+          alternativeMemory.advanceIterator();
         } else {
           replacePage(reference);
-          advanceIterator();
+          alternativeMemory.advanceIterator();
           found = true;
         }
       } else {
