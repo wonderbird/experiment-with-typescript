@@ -25,22 +25,14 @@ export function clock(n: number, referenceList: number[]): number[] {
   }
 
   class Memory {
-    private pages: Page[] = [];
-    private _iterator: number = 0;
+    private readonly pages: Page[] = [];
+    private iterator: number = 0;
 
     constructor(n: number) {
       this.pages = Array(n).fill(new Page(-1, 0));
     }
 
-    public get iterator() {
-      return this._iterator;
-    }
-
-    public set iterator(value: number) {
-      this._iterator = value;
-    }
-
-    public advanceIterator(): void {
+    private advanceIterator(): void {
       this.iterator = (this.iterator + 1) % n;
     }
 
