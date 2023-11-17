@@ -63,28 +63,32 @@ export function clock(n: number, referenceList: number[]): number[] {
     public get pageIds(): number[] {
       return this.pages.map((page) => page.id);
     }
+
+    public request(pageReference: number) {
+      let found = false;
+      while (!found) {
+        let page = this.find(pageReference);
+        found = page !== undefined;
+        if (!page) {
+          if (this.currentPage().referenceCounter > 0) {
+            this.currentPage().referenceCounter--;
+            this.advanceIterator();
+          } else {
+            this.replaceCurrentPage(pageReference);
+            this.advanceIterator();
+            found = true;
+          }
+        } else {
+          page.referenceCounter++;
+        }
+      }
+    }
   }
 
   let alternativeMemory: Memory = new Memory(memory);
 
   for (let reference of referenceList) {
-    let found = false;
-    while (!found) {
-      let page = alternativeMemory.find(reference);
-      found = page !== undefined;
-      if (!page) {
-        if (alternativeMemory.currentPage().referenceCounter > 0) {
-          alternativeMemory.currentPage().referenceCounter--;
-          alternativeMemory.advanceIterator();
-        } else {
-          alternativeMemory.replaceCurrentPage(reference);
-          alternativeMemory.advanceIterator();
-          found = true;
-        }
-      } else {
-        page.referenceCounter++;
-      }
-    }
+    alternativeMemory.request(reference);
   }
 
   return alternativeMemory.pageIds;
