@@ -25,10 +25,7 @@ export function clock(n: number, referenceList: number[]): number[] {
   }
 
   let memory: Page[] = Array(n).fill(new Page(-1, 0));
-  Array(n).fill({
-    id: -1,
-    referenceCounter: 0,
-  });
+
   let iterator: number = 0;
   for (let reference of referenceList) {
     let found = false;
