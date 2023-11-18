@@ -3,13 +3,17 @@ export function clock2(n: number, referenceList: number[]): number[] {
   let referenced: boolean[] = Array(n).fill(false);
   let iterator: number = 0;
 
-  for (const pageId of referenceList) {
+  referenceList.map(request);
+
+  return pageIds;
+
+  function request(pageId: number) {
     // request page
 
     const foundIndex = pageIds.findIndex((id) => id == pageId);
     if (foundIndex !== -1) {
       referenced[foundIndex] = true;
-      continue;
+      return;
     }
 
     while (referenced[iterator]) {
@@ -24,6 +28,4 @@ export function clock2(n: number, referenceList: number[]): number[] {
     // move iterator to next page
     iterator = (iterator + 1) % pageIds.length;
   }
-
-  return pageIds;
 }
