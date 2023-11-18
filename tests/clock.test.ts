@@ -100,9 +100,9 @@ describe("Basic Tests", function () {
   });
 });
 
-describe("Regression Tests", function () {
+describe("Regression tests: clock should", function () {
   // N = 12, REFERENCE LIST = [22,1,19,20,22,1,8,12,20,18,21,4,2,12,23,17,11,17,14,15,22,7,8,20,8,22,1,6,2,4,16,7,17,3,6,15,21,5,24,5,1,20,7,13]: expected [ 22, 5, 24, 1, 20, 13, 15, 7, 8, 6, 21, 17 ] to deeply equal [ 5, 24, 1, 20, 13, 3, 15, 7, 8, 6, 21, 17 ]
-  it("Regression Tests", function () {
+  it("pass codewars random test", function () {
     clock(
       12,
       [
@@ -111,5 +111,11 @@ describe("Regression Tests", function () {
         1, 20, 7, 13,
       ]
     ).should.deep.equal([5, 24, 1, 20, 13, 3, 15, 7, 8, 6, 21, 17]);
+  });
+
+  describe("treat pages referenced once the same as pages referenced multiple times", () => {
+    it("given n = 3, referenceList = [1, 2, 3, 1, 1, 2, 4, 5]", () => {
+      clock(3, [1, 2, 3, 1, 1, 2, 4, 5]).should.deep.equal([5, 2, 4]);
+    });
   });
 });
