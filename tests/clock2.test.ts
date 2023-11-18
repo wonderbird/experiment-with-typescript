@@ -33,11 +33,11 @@ config.truncateThreshold = 0;
 //
 // While the referenced bit of the current page is set:
 //    Unset the referenced bit
-//    Move iterator to next page
+//    Move iterator to next page (including wrap around)
 //
 // Replace the current page with the requested page
 //
-// Move iterator to next page
+// Move iterator to next page (including wrap around)
 //
 // Data structures
 // ===============
@@ -70,6 +70,19 @@ describe("clock2 should", () => {
       [4, [42], [42, -1, -1, -1]],
       [4, [1, 42], [1, 42, -1, -1]],
       [4, [1, 3, 5, 7], [1, 3, 5, 7]],
+    ])(
+      "given n = %p, referenceList = %p -> %p",
+      (n: number, referenceList: number[], expected: number[]) => {
+        clock2(n, referenceList).should.deep.equal(expected);
+      }
+    );
+  });
+
+  describe("wrap around when more pages allocated than available memory", () => {
+    it.each([
+      [1, [1, 2], [2]],
+      [3, [1, 2, 3, 4, 5], [4, 5, 3]],
+      [3, [1, 2, 3, 4, 5, 6, 7], [7, 5, 6]],
     ])(
       "given n = %p, referenceList = %p -> %p",
       (n: number, referenceList: number[], expected: number[]) => {

@@ -7,7 +7,7 @@ export function clock2(n: number, referenceList: number[]): number[] {
     pageIds[iterator] = pageId;
 
     // move iterator to next page
-    iterator = iterator + 1;
+    iterator = (iterator + 1) % pageIds.length;
   }
 
   return pageIds;
