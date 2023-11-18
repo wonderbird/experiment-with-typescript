@@ -8,6 +8,10 @@ class Page {
   public unsetR() {
     this.referenceCounter--;
   }
+
+  public get r(): boolean {
+    return this.referenceCounter > 0;
+  }
 }
 
 class Memory {
@@ -41,7 +45,7 @@ class Memory {
   }
 
   private findInsertPosition() {
-    if (this.currentPage().referenceCounter > 0) {
+    if (this.currentPage().r) {
       this.currentPage().unsetR();
       this.advanceIterator();
       this.findInsertPosition();
