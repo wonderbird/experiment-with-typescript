@@ -60,10 +60,12 @@ describe("clock2 should", () => {
     );
   });
 
-  describe("allocate a single page in empty memory of size 1", () => {
+  describe("allocate a single page in empty memory", () => {
     it.each([
       [1, [1], [1]],
       [1, [9], [9]],
+      [2, [23], [23, -1]],
+      [4, [42], [42, -1, -1, -1]],
     ])(
       "given n = %p, referenceList = %p",
       (n: number, referenceList: number[], expected: number[]) => {
