@@ -8,8 +8,6 @@ export function clock2(n: number, referenceList: number[]): number[] {
   return pageIds;
 
   function request(pageId: number) {
-    // request page
-
     const foundIndex = pageIds.findIndex((id) => id == pageId);
     if (foundIndex !== -1) {
       referenced[foundIndex] = true;
@@ -18,14 +16,15 @@ export function clock2(n: number, referenceList: number[]): number[] {
 
     while (referenced[iterator]) {
       referenced[iterator] = false;
-
-      // move iterator to next page
-      iterator = (iterator + 1) % pageIds.length;
+      moveIterator();
     }
 
     pageIds[iterator] = pageId;
 
-    // move iterator to next page
+    moveIterator();
+  }
+
+  function moveIterator() {
     iterator = (iterator + 1) % pageIds.length;
   }
 }
