@@ -4,6 +4,48 @@ import "chai/register-should";
 import { config } from "chai";
 config.truncateThreshold = 0;
 
+// Steps of the clock algorithm
+//
+// Assumptions
+// ===========
+//
+// - n always > 0
+// - reference list contains only numbers > 0
+// - empty memory page has id -1
+//
+// Algorithm
+// =========
+//
+// Goal: Allocate all pages given to the clock2 call.
+//
+// Initialize memory with empty pages
+// For every page id in the reference list:
+//   request page
+// return the ids of pages in memory
+//
+// Request page algorithm
+// ----------------------
+//
+// Goal: Allocate a single page by its page id
+//
+// If the page is already in memory:
+//   set the referenced bit and return
+//
+// While the referenced bit of the current page is set:
+//    unset the referenced bit
+//    advance to the next memory location
+//
+// Replace the current page with the requested page
+//
+// Data structures
+// ===============
+//
+// Page: Tuple of
+//   id : number
+//   referenced : boolean
+//
+// Memory: Array of Page
+//
 describe("clock2 should", () => {
   it("return", () => {
     clock2(0, []).should.deep.equal([]);
