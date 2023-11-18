@@ -47,7 +47,16 @@ config.truncateThreshold = 0;
 // Memory: Array of Page
 //
 describe("clock2 should", () => {
-  it("return", () => {
-    clock2(0, []).should.deep.equal([]);
+  describe("return empty memory when no page is allocated", () => {
+    it.each([
+      [1, [], [-1]],
+      [2, [], [-1, -1]],
+      [5, [], [-1, -1, -1, -1, -1]],
+    ])(
+      "given n = %p, referenceList = %p",
+      (n: number, referenceList: number[], expected: number[]) => {
+        clock2(n, referenceList).should.deep.equal(expected);
+      }
+    );
   });
 });
