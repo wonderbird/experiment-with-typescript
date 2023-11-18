@@ -102,4 +102,17 @@ describe("clock2 should", () => {
       }
     );
   });
+
+  describe("keep pages requested multiple times for a single full round", () => {
+    it.each([
+      [2, [1, 1, 2, 3], [1, 3]],
+      [3, [1, 1, 2, 3, 4, 5, 6], [6, 4, 5]],
+      [3, [1, 1, 1, 2, 3, 4, 5, 6], [6, 4, 5]],
+    ])(
+      "given n = %p, referenceList = %p -> %p",
+      (n: number, referenceList: number[], expected: number[]) => {
+        clock2(n, referenceList).should.deep.equal(expected);
+      }
+    );
+  });
 });
