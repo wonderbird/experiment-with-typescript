@@ -60,14 +60,16 @@ describe("clock2 should", () => {
     );
   });
 
-  describe("allocate a single page in empty memory", () => {
+  describe("sequentially fill memory with allocated pages", () => {
     it.each([
       [1, [1], [1]],
       [1, [9], [9]],
       [2, [23], [23, -1]],
       [4, [42], [42, -1, -1, -1]],
+      [4, [1, 42], [1, 42, -1, -1]],
+      [4, [1, 3, 5, 7], [1, 3, 5, 7]],
     ])(
-      "given n = %p, referenceList = %p",
+      "given n = %p, referenceList = %p -> %p",
       (n: number, referenceList: number[], expected: number[]) => {
         clock2(n, referenceList).should.deep.equal(expected);
       }
