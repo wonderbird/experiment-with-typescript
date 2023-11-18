@@ -1,16 +1,18 @@
 class Page {
-  constructor(public id: number, public referenceCounter: number) {}
+  private rBit: boolean = false;
+
+  constructor(public id: number) {}
 
   public setR() {
-    this.referenceCounter = 1;
+    this.rBit = true;
   }
 
   public unsetR() {
-    this.referenceCounter = 0;
+    this.rBit = false;
   }
 
   public get r(): boolean {
-    return this.referenceCounter > 0;
+    return this.rBit;
   }
 }
 
@@ -19,7 +21,7 @@ class Memory {
   private iterator: number = 0;
 
   constructor(n: number) {
-    this.pages = Array(n).fill(new Page(-1, 0));
+    this.pages = Array(n).fill(new Page(-1));
   }
 
   public get pageIds(): number[] {
@@ -61,7 +63,7 @@ class Memory {
   }
 
   private insert(reference: number) {
-    this.pages[this.iterator] = new Page(reference, 0);
+    this.pages[this.iterator] = new Page(reference);
     this.advanceIterator();
   }
 }
