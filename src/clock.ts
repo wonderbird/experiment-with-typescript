@@ -2,11 +2,11 @@ class Page {
   constructor(public id: number, public referenceCounter: number) {}
 
   public setR() {
-    this.referenceCounter++;
+    this.referenceCounter = 1;
   }
 
   public unsetR() {
-    this.referenceCounter--;
+    this.referenceCounter = 0;
   }
 
   public get r(): boolean {
