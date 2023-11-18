@@ -59,4 +59,16 @@ describe("clock2 should", () => {
       }
     );
   });
+
+  describe("allocate a single page in empty memory of size 1", () => {
+    it.each([
+      [1, [1], [1]],
+      [1, [9], [9]],
+    ])(
+      "given n = %p, referenceList = %p",
+      (n: number, referenceList: number[], expected: number[]) => {
+        clock2(n, referenceList).should.deep.equal(expected);
+      }
+    );
+  });
 });
