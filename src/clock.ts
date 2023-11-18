@@ -1,5 +1,13 @@
 class Page {
   constructor(public id: number, public referenceCounter: number) {}
+
+  public setR() {
+    this.referenceCounter++;
+  }
+
+  public unsetR() {
+    this.referenceCounter--;
+  }
 }
 
 class Memory {
@@ -29,12 +37,12 @@ class Memory {
 
   private increment(pageReference: number) {
     let page = this.pages.find((page) => page.id === pageReference)!;
-    page.referenceCounter++;
+    page.setR();
   }
 
   private findInsertPosition() {
     if (this.currentPage().referenceCounter > 0) {
-      this.currentPage().referenceCounter--;
+      this.currentPage().unsetR();
       this.advanceIterator();
       this.findInsertPosition();
     }
