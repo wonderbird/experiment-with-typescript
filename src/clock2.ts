@@ -3,6 +3,10 @@ export function clock2(n: number, referenceList: number[]): number[] {
   let iterator: number = 0;
 
   for (const pageId of referenceList) {
+    if (pageIds.some((id) => id == pageId)) {
+      continue;
+    }
+
     // request page
     pageIds[iterator] = pageId;
 

@@ -90,4 +90,16 @@ describe("clock2 should", () => {
       }
     );
   });
+
+  describe("reuse already allocated pages", () => {
+    it.each([
+      [2, [1, 1], [1, -1]],
+      [3, [1, 2, 3, 2, 4], [4, 2, 3]],
+    ])(
+      "given n = %p, referenceList = %p -> %p",
+      (n: number, referenceList: number[], expected: number[]) => {
+        clock2(n, referenceList).should.deep.equal(expected);
+      }
+    );
+  });
 });
