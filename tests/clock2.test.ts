@@ -20,7 +20,7 @@ config.truncateThreshold = 0;
 //
 // Initialize memory with empty pages
 // For every page id in the reference list:
-//   request page
+//   Request page
 // return the ids of pages in memory
 //
 // Request page algorithm
@@ -29,13 +29,15 @@ config.truncateThreshold = 0;
 // Goal: Allocate a single page by its page id
 //
 // If the page is already in memory:
-//   set the referenced bit and return
+//   Set the referenced bit and return
 //
 // While the referenced bit of the current page is set:
-//    unset the referenced bit
-//    advance to the next memory location
+//    Unset the referenced bit
+//    Move iterator to next page
 //
 // Replace the current page with the requested page
+//
+// Move iterator to next page
 //
 // Data structures
 // ===============
