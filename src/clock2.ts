@@ -8,7 +8,7 @@ export function clock2(n: number, referenceList: number[]): number[] {
   return pageIds;
 
   function request(pageId: number) {
-    const foundIndex = pageIds.findIndex((id) => id === pageId);
+    const foundIndex = pageIds.indexOf(pageId);
     if (foundIndex !== -1) {
       referenced[foundIndex] = true;
       return;
