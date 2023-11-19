@@ -1,6 +1,5 @@
 export function lru(n: number, referencesList: number[]): number[] {
   let memory: number[] = Array(n).fill(-1);
-  let target = 0;
   let birthdays: number[] = Array(n).fill(-1);
 
   for (
@@ -17,12 +16,10 @@ export function lru(n: number, referencesList: number[]): number[] {
     }
 
     const oldest = Math.min(...birthdays);
-    target = birthdays.indexOf(oldest);
+    const target = birthdays.indexOf(oldest);
 
     memory[target] = pageId;
     birthdays[target] = referenceIndex;
-
-    target = (target + 1) % n;
   }
 
   return memory;
