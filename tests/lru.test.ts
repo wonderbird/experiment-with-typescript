@@ -1,5 +1,6 @@
 import { lru } from "../src/lru";
 
+import "chai/register-should";
 import { assert, config } from "chai";
 config.truncateThreshold = 0;
 
@@ -29,6 +30,18 @@ describe("Basic Tests", function () {
     ];
     for (const [n, referencesList, expected] of TESTS)
       doTest(n, referencesList, expected);
+  });
+});
+
+describe("lru should", () => {
+  describe("return empty memory when no page allocated and", () => {
+    it.each([
+      [1, [], [-1]],
+      [2, [], [-1, -1]],
+      [5, [], [-1, -1, -1, -1, -1]],
+    ])("n is %p", (n: number, _: number[], expected: number[]) => {
+      lru(n, []).should.deep.equal(expected);
+    });
   });
 });
 

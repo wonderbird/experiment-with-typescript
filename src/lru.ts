@@ -1,3 +1,3 @@
 export function lru(n: number, referencesList: number[]): number[] {
-  return [];
+  return Array(n).fill(-1);
 }
