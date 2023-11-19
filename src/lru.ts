@@ -12,7 +12,7 @@ export function lru(n: number, referencesList: number[]): number[] {
     }
 
     memory[targetIndex] = referencesList[referenceIndex];
-    targetIndex = targetIndex + 1;
+    targetIndex = (targetIndex + 1) % n;
   }
 
   return memory;

@@ -69,6 +69,18 @@ describe("lru should", () => {
       }
     );
   });
+
+  describe("wrap around when all allocated pages are different", () => {
+    it.each([
+      [2, [1, 2, 3], [3, 2]],
+      [3, [1, 2, 3, 4, 5, 6, 7], [7, 5, 6]],
+    ])(
+      "n = %p, referencesList = %p -> %p",
+      (n: number, referencesList: number[], expected: number[]) => {
+        lru(n, referencesList).should.deep.equal(expected);
+      }
+    );
+  });
 });
 
 // Algorithm Design
