@@ -31,3 +31,37 @@ describe("Basic Tests", function () {
       doTest(n, referencesList, expected);
   });
 });
+
+// Aglorithm Design
+// ================
+//
+// Assumptions
+// -----------
+//
+// - n > 0
+// - reference list contains only numbers > 0
+// - empty memory page has id -1
+//
+// Data definitions
+// ----------------
+//
+// - PageId: number       A valid page ID is either -1 for empty or > 0
+// - memory: PageId[]     Memory is the list memory cells each containing a pageId; length n
+// - lru: number[]        Age of memory cell with the same index
+// - targetIndex: number  Index of target memory cell
+//
+// Algorithm
+// ---------------
+//
+// n, referencesList -> pageIds
+//
+// Initialize memory of size n with empty pages
+// targetIndex = 0
+// For pageId, referenceIndex of referencesList:
+//   If pageId is in memory:
+//     Set lru at index of memory cell to referenceIndex
+//   Else
+//     If memory is full:
+//       Set targetIndex to index of oldest page in memory
+//     Replace page at targetIndex by pageId
+//     Increase targetIndex by 1
