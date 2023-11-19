@@ -14,7 +14,7 @@ function doTest(n: number, referenceList: number[], expected: number[]) {
 }
 
 describe("Basic Tests", function () {
-  xit("Basic Tests", function () {
+  it("Basic Tests", function () {
     const TESTS: [number, number[], number[]][] = [
       [3, [1, 2, 3, 4, 3, 2, 5], [5, 2, 3]],
       [5, [], [-1, -1, -1, -1, -1]],
@@ -81,6 +81,18 @@ describe("lru should", () => {
       }
     );
   });
+
+  describe("replace last recently used page", () => {
+    it.each([
+      [2, [1, 2, 3], [3, 2]],
+      [2, [1, 2, 1, 3], [1, 3]],
+    ])(
+      "n = %p, referencesList = %p -> %p",
+      (n: number, referencesList: number[], expected: number[]) => {
+        lru(n, referencesList).should.deep.equal(expected);
+      }
+    );
+  });
 });
 
 // Algorithm Design
@@ -96,10 +108,10 @@ describe("lru should", () => {
 // Data definitions
 // ----------------
 //
-// - PageId: number       A valid page ID is either -1 for empty or > 0
-// - memory: PageId[]     Memory is the list memory cells each containing a pageId; length n
-// - lru: number[]        Age of memory cell with the same index
-// - targetIndex: number  Index of target memory cell
+// - PageId: number             A valid page ID is either -1 for empty or > 0
+// - memory: PageId[]           Memory is the list memory cells each containing a pageId; length n
+// - birthdays: number[]        Loop index, when memory cell with the same index was assigned or accessed last
+// - targetIndex: number        Index of target memory cell
 //
 // Algorithm
 // ---------------
