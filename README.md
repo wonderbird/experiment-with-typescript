@@ -1,6 +1,6 @@
 # Experiment with TypeScript
 
-Learning experiments with TypeScript
+Learning experiments with TypeScript.
 
 | Kata name and link                                                                                      | Dificulty (kyu) | My Feedback                        | Solution                                 | Tests                                                |
 | ------------------------------------------------------------------------------------------------------- | --------------- | ---------------------------------- | ---------------------------------------- | ---------------------------------------------------- |
@@ -22,3 +22,11 @@ npm install
 ```bash
 npm run test
 ```
+
+## What's next?
+
+Perform the "Vending Machine Kata" as a [simple plugin for Obsidian.md](https://github.com/obsidianmd/obsidian-sample-plugin).
+
+- [Guy Royse: Vending Machine Kata](https://github.com/guyroyse/vending-machine-kata)
+- [Samman Coaching: Vending Machine Kata](https://sammancoaching.org/kata_descriptions/vending_machine.html)
+- [Codewars: Vending Machine](https://www.codewars.com/kata/586e6d4cb98de09e3800014f/train/javascript)
