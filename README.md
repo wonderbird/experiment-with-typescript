@@ -11,6 +11,10 @@ Learning experiments with TypeScript.
 | [Page Replacement: Clock](https://www.codewars.com/kata/62f23d84eb2533004be50c0d/train/typescript)      | 6               | second attempt                     | [clock2.ts](./src/clock2.ts)             | [clock2.test.ts](./tests/clock2.test.ts)             |
 | [Page Replacement: LRU](https://www.codewars.com/kata/6329d94bf18e5d0e56bfca77/train/typescript)        | 6               | after solving clock, quite similar | [lru.ts](./src/lru.ts)                   | [lru.test.ts](./tests/lru.test.ts)                   |
 
+## Acknowledgements
+
+Many thanks to [JetBrains](https://www.jetbrains.com/?from=experiment-with-typescript) who provide an [Open Source License](https://www.jetbrains.com/community/opensource/) for my projects ❤️.
+
 ## Install prerequisites
 
 ```bash
